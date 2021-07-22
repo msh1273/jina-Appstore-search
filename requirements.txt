@@ -1,0 +1,4 @@
+jina[http,hub]
+pandas==1.2.5
+git+https://github.com/jina-ai/jina-commons
+git+https://github.com/jina-ai/executor-indexers
