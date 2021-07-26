@@ -2,7 +2,7 @@ from jina import Executor, Document, DocumentArray, requests
 import numpy as np
 from typing import Tuple
 import os
-top_k = 20
+top_k = 15
 
 
 class DiskIndexer(Executor):
@@ -21,7 +21,7 @@ class DiskIndexer(Executor):
     def save_path(self):
         if not os.path.exists(self.workspace):
             os.makedirs(self.workspace)
-        return os.path.join(self.workspace, "apps.json")
+        return os.path.join(self.workspace, "indexer.json")
 
     def close(self):
         self._docs.save(self.save_path)
@@ -33,7 +33,6 @@ class DiskIndexer(Executor):
 
     @requests(on="/search")
     def search(self, docs: "DocumentArray", **kwargs):
-        print(f"\tSearching index of {len(self._docs)} Documents for \"{docs[0].text}\"")
         a = np.stack(docs.get_attributes("embedding"))
         b = np.stack(self._docs.get_attributes("embedding"))
         q_emb = _ext_A(_norm(a))

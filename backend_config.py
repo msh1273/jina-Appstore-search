@@ -1,6 +1,6 @@
 # in executors.py
 model = "sentence-transformers/msmarco-distilbert-base-v3" # Language model will we use to "understand" the text
-top_k = 20 # How many results will a query return?
+top_k = 15 # How many results will a query return?
 
 # in app.py
 port = 45678 # Port for REST query gateway
